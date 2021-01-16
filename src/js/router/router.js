@@ -1,8 +1,9 @@
-import { HomeComponent, level1 } from "../pages/index";
+import { HomeComponent, level1, StartGame } from "../pages/index";
 
 // Routes 
 const routes = [
   { path: '/', component: HomeComponent },
+  { path: '/start-game', component: StartGame },
   { path: '/level-1', component: level1 },
 ];
 
@@ -17,4 +18,5 @@ export const router = () => {
     const { component = ErrorComponent } = findComponentByPath(path, routes) || {};
     // Render the component in the "app" placeholder
     document.body.innerHTML = component.render();
+    component.functionality();
   };

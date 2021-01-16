@@ -1,13 +1,14 @@
-export const HomeComponent = {
+export const StartGame = {
     render: () => {
       return `
         <section>
-          <h1>Home</h1>
+          <h1>Start game</h1>
           <p>This is just a test</p>
-          <a href="#/start-game">Click</a>
+          <a href="#/level-1">Click</a>
         </section>
       `;
     },
+
     functionality: () => {
 
     }

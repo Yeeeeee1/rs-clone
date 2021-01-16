@@ -56,6 +56,7 @@ const config = {
           'style-loader',
           MiniCssExtractPlugin.loader,
           {
+            loader: 'style-loader',
             loader: 'css-loader',
             options: {
               sourceMap: true
