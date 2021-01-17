@@ -1,4 +1,4 @@
-import { HomeComponent, level1, StartGame } from "../pages/index";
+import { HomeComponent, level1, StartGame, ErrorComponent } from "../pages/index";
 
 // Routes 
 const routes = [

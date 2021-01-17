@@ -19,6 +19,7 @@ export const level1 = {
         <div class="menu-overlay">
         <div class="menu">
         <button id="continue">Continue</button>
+        <button onclick="location.href='#/statistic'">Statistic</button>
         <button onclick="location.href='#/start-game'">Main menu</button>
         </div>
         </div>
@@ -39,11 +40,16 @@ export const level1 = {
       let continuButton = document.getElementById("continue");
 
       continuButton.onclick = function () {
-        document.querySelector(".menu-overlay").style.display = "none";
+          document.querySelector(".menu-overlay").style.display = "none";
         esc = false;
         update();
         
+        
       }
+
+      
+
+      
 
 
       canvas.width = window.innerWidth;
@@ -98,7 +104,7 @@ export const level1 = {
         {
           x: 0,
           y: canvas.height - canvas.height / 2,
-          w: canvas.width,
+          w: 2000,
           h: canvas.height / 2,
         },
         {
@@ -112,6 +118,18 @@ export const level1 = {
           y: 300,
           w: 100,
           h: 100,
+        },
+        {
+          x: -10,
+          y: 0,
+          w: 10,
+          h: canvas.height,
+        },
+        {
+          x: 2010,
+          y: 0,
+          w: 10,
+          h: canvas.height,
         }
       ];
 
@@ -135,6 +153,7 @@ export const level1 = {
       let left = 0;
       let right = 0;
       let esc = false;
+      let startGame = false;
 
       var keyPressed = function(e) {
         if (e.code === "KeyW") {
@@ -149,7 +168,7 @@ export const level1 = {
         if (e.code === "KeyD") {
           right = 1;
         }
-        if (e.code === "Escape") {
+        if (e.code === "Escape" && startGame) {
           esc = !esc;
           document.querySelector(".menu-overlay").style.display = esc ? "block" : "none";
           update();
@@ -186,6 +205,8 @@ export const level1 = {
       draw(player, "red");
       draw(walls[0], "green");
 
+      let cof = 0;
+
       function draw(thing) {
         for (let i = 0; i < thing.length; i++) {
           ctx.fillStyle = "rgb(13,12,13)";
@@ -199,18 +220,36 @@ export const level1 = {
       }
 
       function update () {
+
+        if (player.x + player.w >= canvas.width + cof && right && player.x + player.w + spd <= 2000) {
+          cof += 10;
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.translate(-10, 0);
+          ctx.clearRect(0, 0, canvas.width + cof, canvas.height);
+        }
+
+        if (player.x - cof <= 0 && left) {
+          cof -= 10;
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.translate(10, 0);
+          ctx.clearRect(0, 0, canvas.width - canvas.width + cof, canvas.height);
+        }
+        
         movePlayer();
         drawWin();
         
         drawPlayer();
         draw(walls);
         isWin();
+        
 
         if (!esc) {
           requestAnimationFrame(update);
         } else {
           cancelAnimationFrame(myReq);
         }
+
+        
         
       }
 
@@ -226,6 +265,7 @@ export const level1 = {
         for (let i = 0; i < win.length; i++) {
           if (player.x + 25 >= win[i].x && player.x - 25 <= win[i].x && player.y == win[i].y) {
             player.c = "white";
+            
           } else {
             player.c = "rgb(180,53,60)";
           }
@@ -348,6 +388,7 @@ export const level1 = {
 
       document.querySelector(".confirm-button").onclick = function () {
         document.querySelector(".overlay").style.display = "none";
+        startGame = true;
         requestAnimationFrame(update);
         
       };
