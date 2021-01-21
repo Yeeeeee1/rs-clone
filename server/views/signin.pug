@@ -1,0 +1,15 @@
+extends layouts/main.pug
+block content
+	div(class="page-form-container")
+		form(class="page-form" action="/signin" method="POST")
+			div(class="control")
+				div(class="field")
+					label(class="label") Email
+					div(class="control")
+						input(class="input" name="email" type="text" placeholder="e.g. alexsmith@gmail.com")
+
+				div(class="field")
+					label(class="label") Password
+					div(class="control")
+						input(class="input" name="password" type="password")
+			button(class="button is-info mt-3") Sign in

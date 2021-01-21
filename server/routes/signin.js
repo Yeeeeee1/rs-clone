@@ -4,9 +4,10 @@ const { Router } = require('express');
 const router = Router();
 
 router.get('/', (req, res) => {
-	res.render('home', {
-		title: 'Thomas Was Alone',
+	res.render('signin', {
+		title: 'Sign in'
 	});
 });
 
 module.exports = router;
+
