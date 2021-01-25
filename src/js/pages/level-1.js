@@ -3,9 +3,11 @@ import { drawWin } from "../drawFunctions/drawWin";
 import { drawPlayer } from "../drawFunctions/drawPlayer";
 import { draw } from "../drawFunctions/drawWalls";
 import { drawSpikes } from "../drawFunctions/drawSpikes";
+import { isSpike } from "../checkFunctions/isSpike";
+import { isWin } from "../checkFunctions/isWin";
+import { collision } from "../checkFunctions/collision";
 
 export const level1 = {
-  text: "MOVEMENT - A(left) D(right) | ESC - menu",
   render: function () {
     return `
         <canvas id="canvas"></canvas>
@@ -13,7 +15,7 @@ export const level1 = {
         <div class="modal">
         <h1>Hello!</h1>
 
-        <h3>${this.text}</h3>
+        <h3>MOVEMENT - A(left) D(right) | ESC - menu</h3>
 
         <button class="confirm-button">OK</button>
         </div>
@@ -86,6 +88,51 @@ export const level1 = {
 
       if (e.target.id == "larrow") {
         left = 0;
+      }
+    };
+
+    document.onkeydown = function (e) {
+      keyPressed(e);
+    };
+
+    document.onkeyup = function (e) {
+      keyReleased(e);
+    };
+
+    var keyPressed = function (e) {
+      if (e.code === "KeyW") {
+        up = 1;
+      }
+      if (e.code === "KeyS") {
+        down = 1;
+      }
+      if (e.code === "KeyA") {
+        left = 1;
+      }
+      if (e.code === "KeyD") {
+        right = 1;
+      }
+      if (e.code === "Escape" && startGame) {
+        esc = !esc;
+        document.querySelector(".menu-overlay").style.display = esc
+          ? "block"
+          : "none";
+        update();
+      }
+    };
+
+    var keyReleased = function (e) {
+      if (e.code === "KeyW") {
+        up = 0;
+      }
+      if (e.code === "KeyS") {
+        down = 0;
+      }
+      if (e.code === "KeyA") {
+        left = 0;
+      }
+      if (e.code === "KeyD") {
+        right = 0;
       }
     };
 
@@ -175,64 +222,6 @@ export const level1 = {
     let isSpikes = false;
     let sKeyUp = true;
 
-    document.onkeydown = function (e) {
-      keyPressed(e);
-    };
-
-    document.onkeyup = function (e) {
-      keyReleased(e);
-    };
-
-    var keyPressed = function (e) {
-      if (e.code === "KeyW") {
-        up = 1;
-      }
-      if (e.code === "KeyS") {
-        down = 1;
-      }
-      if (e.code === "KeyA") {
-        left = 1;
-      }
-      if (e.code === "KeyD") {
-        right = 1;
-      }
-      if (e.code === "Escape" && startGame) {
-        esc = !esc;
-        document.querySelector(".menu-overlay").style.display = esc
-          ? "block"
-          : "none";
-        update();
-      }
-    };
-
-    var keyReleased = function (e) {
-      if (e.code === "KeyW") {
-        up = 0;
-      }
-      if (e.code === "KeyS") {
-        down = 0;
-      }
-      if (e.code === "KeyA") {
-        left = 0;
-      }
-      if (e.code === "KeyD") {
-        right = 0;
-      }
-    };
-
-    function collision(r1, r2) {
-      if (
-        r1.x + r1.w > r2.x &&
-        r1.x < r2.x + r2.w &&
-        r2.y + r2.h > r1.y &&
-        r2.y < r1.y + r1.h
-      ) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-
     function update() {
       isEdge();
 
@@ -242,29 +231,17 @@ export const level1 = {
       drawPlayer(player, ctx);
       draw(walls, ctx);
       drawSpikes(spikes, ctx);
-      isWin();
-      isSpike();
+      isWin(player, win, ctx);
+      let isSpikeObj = isSpike(player, spikes, ctx);
+
+      isSpikes = isSpikeObj.isSpikes;
+
+      startGame = isSpikeObj.startGame;
 
       if (!esc && !isSpikes) {
         requestAnimationFrame(update);
       } else {
         cancelAnimationFrame(myReq);
-      }
-    }
-
-    function isSpike() {
-      for (let i = 0; i < spikes.length; i++) {
-        if (
-          player.x + 50 >= spikes[i].x &&
-          player.x - 100 <= spikes[i].x &&
-          player.y >= spikes[i].y - 200
-        ) {
-          document.querySelector(".menu-restart-overlay").style.display =
-            "block";
-          document.querySelector(".menu-restart").style.display = "block";
-          isSpikes = true;
-          startGame = false;
-        }
       }
     }
 
@@ -312,30 +289,6 @@ export const level1 = {
             player.x += s * dir;
             break;
           }
-        }
-      }
-    }
-
-    function isWin() {
-      for (let i = 0; i < win.length; i++) {
-        if (
-          player.x + 25 >= win[i].x &&
-          player.x - 25 <= win[i].x &&
-          player.y == win[i].y
-        ) {
-          player.c = "white";
-          function jumpAnimation() {
-            if (player.w != 0) {
-              ctx.clearRect(player.x, player.y, player.w, player.h);
-              player.w--;
-            } else {
-              clearInterval(jan);
-              location.href = "#/level-2";
-            }
-          }
-          let jan = setInterval(jumpAnimation, 1000 / 60); // 60fps
-        } else {
-          player.c = "rgb(180,53,60)";
         }
       }
     }
