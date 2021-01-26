@@ -6,6 +6,8 @@ import { drawSpikes } from "../drawFunctions/drawSpikes";
 import { isSpike } from "../checkFunctions/isSpike";
 import { isWin } from "../checkFunctions/isWin";
 import { collision } from "../checkFunctions/collision";
+import { isEdge } from "../checkFunctions/isEdge";
+import { movePlayer } from "../playerMove/movePlayer";
 
 export const level1 = {
   render: function () {
@@ -206,10 +208,6 @@ export const level1 = {
     ];
 
     let spd = 5;
-    let gravity = 4;
-    let jumpHeight = 24;
-    let jump = 0;
-    let isDown = false;
     let myReq;
 
     let up = 0;
@@ -218,14 +216,12 @@ export const level1 = {
     let right = 0;
     let esc = false;
     let startGame = false;
-    let cof = 0;
     let isSpikes = false;
-    let sKeyUp = true;
 
     function update() {
-      isEdge();
+      isEdge(player, left, right, spd, walls, ctx, canvas);
 
-      movePlayer();
+      movePlayer(right, left, spd, down, player, walls, ctx, up);
       drawWin(win, ctx);
 
       drawPlayer(player, ctx);
@@ -243,169 +239,6 @@ export const level1 = {
       } else {
         cancelAnimationFrame(myReq);
       }
-    }
-
-    function isEdge() {
-      if (
-        player.x + player.w >= canvas.width / 2 + cof &&
-        right &&
-        player.x + player.w <= 2000
-      ) {
-        cof += 10;
-        let dir = right - left;
-
-        for (let s = spd; s > 0; s--) {
-          if (placeFree(player.x + s * dir, player.y)) {
-            ctx.clearRect(player.x, player.y, player.w, player.h);
-            player.x += s * dir;
-            break;
-          }
-        }
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.translate(-10, 0);
-
-        ctx.clearRect(0, 0, canvas.width + cof, canvas.height);
-        ctx.beginPath();
-      } else if (player.x - cof <= canvas.width / 2 && left) {
-        cof -= 10;
-        let dir = right - left;
-
-        for (let s = spd; s > 0; s--) {
-          if (placeFree(player.x + s * dir, player.y)) {
-            ctx.clearRect(player.x, player.y, player.w, player.h);
-            player.x += s * dir;
-            break;
-          }
-        }
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.translate(10, 0);
-        ctx.clearRect(0, 0, canvas.width + cof, canvas.height);
-        ctx.beginPath();
-      } else {
-        let dir = right - left;
-        for (let s = spd; s > 0; s--) {
-          if (placeFree(player.x + s * dir, player.y)) {
-            ctx.clearRect(player.x, player.y, player.w, player.h);
-            player.x += s * dir;
-            break;
-          }
-        }
-      }
-    }
-
-    function placeFree(xNew, yNew) {
-      let temp = { x: xNew, y: yNew, w: player.w, h: player.h };
-
-      for (let i = 0; i < walls.length; i++) {
-        if (collision(temp, walls[i])) {
-          return false;
-        }
-      }
-
-      return true;
-    }
-
-    function movePlayer() {
-      let dir = right - left;
-
-      for (let s = spd; s > 0; s--) {
-        if (placeFree(player.x + s * dir, player.y)) {
-          ctx.clearRect(player.x, player.y, player.w, player.h);
-          player.x += s * dir;
-          break;
-        }
-      }
-
-      if (down) {
-        ctx.clearRect(player.x, player.y, player.w, player.h);
-        //player.h = 50;
-        if (sKeyUp) {
-          //player.y += 50;
-          sKeyUp = false;
-        }
-        isDown = true;
-
-        function downAnimation() {
-          if (player.h != 50) {
-            ctx.clearRect(player.x, player.y, player.w, player.h);
-            player.h -= 2;
-          } else {
-            clearInterval(dan);
-          }
-        }
-
-        let dan = setInterval(downAnimation, 1000 / 60); // 60fps
-      } else if (
-        isDown &&
-        !placeFree(player.x, player.y + 1) &&
-        placeFree(player.x, player.y - 1)
-      ) {
-        ctx.clearRect(player.x, player.y, player.w, player.h);
-
-        sKeyUp = true;
-        /*player.h = 100;
-          
-          player.y -= 50;*/
-
-        function upAnimation() {
-          if (player.h != 100) {
-            ctx.clearRect(player.x, player.y, player.w, player.h);
-            player.h += 2;
-            player.y -= 2;
-          } else {
-            clearInterval(uan);
-            isDown = false;
-          }
-        }
-
-        let uan = setInterval(upAnimation, 1000 / 60); // 60fps
-      } else if (!down && !placeFree(player.x, player.y - 1)) {
-        ctx.clearRect(player.x, player.y, player.w, player.h);
-        player.h = 50;
-      } else if (placeFree(player.x, player.y + 1) && !down) {
-        player.h = 100;
-      }
-
-      //If you are on the ground and you press up, set
-      //jump to jumpHeight
-      if (!placeFree(player.x, player.y + 1) && up) {
-        jump = jumpHeight;
-      }
-
-      if (jump > 0) {
-        playerJump();
-      } else {
-        playerFall();
-      }
-    }
-
-    function playerFall() {
-      for (var i = gravity; i > 0; i--) {
-        if (placeFree(player.x, player.y + i)) {
-          ctx.clearRect(player.x, player.y, player.w, player.h);
-          player.y += i;
-          break;
-        }
-      }
-    }
-
-    function playerJump() {
-      for (var j = jump; j > 0; j--) {
-        if (up && placeFree(player.x, player.y - j)) {
-          ctx.clearRect(player.x, player.y, player.w, player.h);
-          player.y -= j;
-
-          break;
-        }
-      }
-
-      //Stop jumping if the player lets go of the button
-      if (!up) {
-        jump = 0;
-      }
-
-      //Slowly decrease jump speed but don't go below 0
-      jump = Math.max(jump - 1, 0);
     }
   },
 };
