@@ -1,4 +1,6 @@
 import arrow from "../../img/arrow.png";
+import level1s from "../../img/level1s.mp3";
+import playerJumpSound from "../../img/player-jump-sound.mp3";
 import { drawWin } from "../drawFunctions/drawWin";
 import { drawPlayer } from "../drawFunctions/drawPlayer";
 import { draw } from "../drawFunctions/drawWalls";
@@ -47,6 +49,7 @@ export const level1 = {
         <img id="darrow" src="${arrow}">
         <img id="uarrow" src="${arrow}">
         </div>
+        <audio src="${playerJumpSound}" id="jump-audio"></audio>
       `;
   },
   functionality: () => {
@@ -239,6 +242,13 @@ export const level1 = {
       } else {
         cancelAnimationFrame(myReq);
       }
+    }
+
+    audioPlay();
+
+    function audioPlay() {
+      var audio = new Audio(level1s);
+      audio.play();
     }
   },
 };

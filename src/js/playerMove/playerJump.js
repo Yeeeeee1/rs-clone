@@ -10,6 +10,17 @@ export function playerJump(jump, up, player, walls, ctx) {
     }
   }
 
+  audioPlayJump();
+
+  function audioPlayJump() {
+    var audio = document.querySelector("#jump-audio");
+    audio.play();
+    setTimeout(function () {
+      audio.pause();
+      audio.currentTime = 0;
+    }, 400);
+  }
+
   //Stop jumping if the player lets go of the button
   if (!up) {
     jump = 0;
