@@ -5,11 +5,14 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongodb-session')(session);
 const csrf = require('csurf');
+const flash = require('connect-flash');
 const varMiddleware = require('./middleware/variables');
 const userMiddleware = require('./middleware/user');
 const homeRoutes = require('./routes/home');
 const signinRoutes = require('./routes/signin');
 const signupRoutes = require('./routes/signup');
+const resetRoutes = require('./routes/reset');
+const passwordRoutes = require('./routes/password');
 
 dotenv.config();
 
@@ -35,6 +38,7 @@ app.use(session({
 	store
 }));
 app.use(csrf());
+app.use(flash());
 
 app.use(varMiddleware);
 app.use(userMiddleware);
@@ -42,6 +46,8 @@ app.use(userMiddleware);
 app.use('/', homeRoutes);
 app.use('/signin', signinRoutes);
 app.use('/signup', signupRoutes);
+app.use('/reset', resetRoutes);
+app.use('/password', passwordRoutes);
 
 
 async function init() {

@@ -1,6 +1,7 @@
 .page-form-container {
 	min-height: 100vh;
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 }
@@ -18,6 +19,24 @@
 
 .page-form .control {
 	width: 100%;
+}
+
+.page-form-links {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.page-form-links a:not(:first-child) {
+	margin-left: 20px;
+}
+
+.alert {
+	margin-bottom: 20px;
+	padding: 20px;
+	font-size: 20px;
+	text-align: center;
+	color: rgba(255, 0, 0, 0.5);
 }
 
 @media (max-width: 576px) {

@@ -23,6 +23,7 @@
     "express-session": "^1.17.1",
     "express-validator": "^6.9.2",
     "mongoose": "^5.11.12",
+    "nodemailer": "^6.4.17",
     "pug": "^3.0.0"
   }
 }
