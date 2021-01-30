@@ -10,6 +10,7 @@ import { isWin } from "../checkFunctions/isWin";
 import { collision } from "../checkFunctions/collision";
 import { isEdge } from "../checkFunctions/isEdge";
 import { movePlayer } from "../playerMove/movePlayer";
+import { audioPlay } from "../audioFunctions/mainMusic";
 
 export const level1 = {
   render: function () {
@@ -71,18 +72,22 @@ export const level1 = {
     document.onmousedown = function (e) {
       if (e.target.id == "rarrow") {
         right = 1;
+        update();
       }
 
       if (e.target.id == "larrow") {
         left = 1;
+        update();
       }
 
       if (e.target.id == "darrow") {
-        right = 1;
+        down = 1;
+        update();
       }
 
       if (e.target.id == "uarrow") {
-        left = 1;
+        up = 1;
+        update();
       }
     };
 
@@ -93,6 +98,13 @@ export const level1 = {
 
       if (e.target.id == "larrow") {
         left = 0;
+      }
+      if (e.target.id == "darrow") {
+        down = 0;
+      }
+
+      if (e.target.id == "uarrow") {
+        up = 0;
       }
     };
 
@@ -244,11 +256,6 @@ export const level1 = {
       }
     }
 
-    audioPlay();
-
-    function audioPlay() {
-      var audio = new Audio(level1s);
-      audio.play();
-    }
+    //audioPlay(level1s);
   },
 };
