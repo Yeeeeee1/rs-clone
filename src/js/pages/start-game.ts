@@ -1,5 +1,5 @@
 export const StartGame = {
-    render: () => {
+    render: ():string => {
       return `
         <section>
           <h1>Start game</h1>
@@ -9,7 +9,7 @@ export const StartGame = {
       `;
     },
 
-    functionality: () => {
-
+    functionality: ():void => {
+      console.log("start game page");
     }
   } 

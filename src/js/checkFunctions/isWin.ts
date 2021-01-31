@@ -1,4 +1,7 @@
-export function isWin(player, win, ctx) {
+import { IPlayer } from "../interfaces/playerInterface";
+import { IWin } from "../interfaces/winInterface";
+
+export function isWin(player:IPlayer, win:IWin[], ctx:CanvasRenderingContext2D):void {
   for (let i = 0; i < win.length; i++) {
     if (
       player.x + 25 >= win[i].x &&
@@ -6,7 +9,8 @@ export function isWin(player, win, ctx) {
       player.y == win[i].y
     ) {
       player.c = "white";
-      function jumpAnimation() {
+
+      const jan = setInterval(function ():void {
         if (player.w != 0) {
           ctx.clearRect(player.x, player.y, player.w, player.h);
           player.w--;
@@ -14,8 +18,8 @@ export function isWin(player, win, ctx) {
           clearInterval(jan);
           location.href = "#/level-2";
         }
-      }
-      let jan = setInterval(jumpAnimation, 1000 / 60); // 60fps
+      }, 1000 / 60); // 60fps
+
     } else {
       player.c = "rgb(180,53,60)";
     }

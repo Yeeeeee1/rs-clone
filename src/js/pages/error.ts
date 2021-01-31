@@ -1,12 +1,12 @@
 export const ErrorComponent = {
-  render: () => {
+  render: ():string => {
     return `
         <section>
           <h1>404 Not found</h1>
         </section>
       `;
   },
-  functionality: () => {
-    console.log("ts");
+  functionality: ():void => {
+    console.log("error page");
   },
 };

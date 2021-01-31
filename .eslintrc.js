@@ -1,20 +1,6 @@
 module.exports = {
-    "env": {
-        "browser": true,
-        "es6": true
-    },
-        "extends": [
-            "airbnb-base",
-            "prettier"
-        ],
-    "globals": {
-        "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
-    },
-    "parserOptions": {
-        "ecmaVersion": 2018,
-        "sourceType": "module"
-    },
-    "rules": {
-    }
+  root: true,
+  parser: "@typescript-eslint/parser",
+  plugins: ["@typescript-eslint"],
+  extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
 };

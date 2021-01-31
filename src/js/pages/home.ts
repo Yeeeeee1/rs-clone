@@ -1,14 +1,14 @@
 export const HomeComponent = {
-    render: () => {
-      return `
+  render: ():string => {
+    return `
         <section>
           <h1>Home</h1>
           <p>This is just a test</p>
           <a href="#/start-game">Click</a>
         </section>
       `;
-    },
-    functionality: () => {
-
-    }
-  } 
+  },
+  functionality: ():void => {
+    console.log("home page");
+  },
+};

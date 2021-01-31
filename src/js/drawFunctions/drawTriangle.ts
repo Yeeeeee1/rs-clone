@@ -1,4 +1,4 @@
-export function drawTriangle(x, y, ctx) {
+export function drawTriangle(x:number, y:number, ctx:CanvasRenderingContext2D):void {
   ctx.fillStyle = "rgb(13, 12, 13)";
   ctx.moveTo(x, y);
   ctx.lineTo(x + 100, y);

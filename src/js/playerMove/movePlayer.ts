@@ -1,13 +1,15 @@
 import { placeFree } from "../checkFunctions/placeFree";
-import { playerFall } from "../playerMove/playerFall";
-import { playerJump } from "../playerMove/playerJump";
-import { playerDown } from "../playerMove/playerDown";
+import { playerFall } from "./playerFall";
+import { playerJump } from "./playerJump";
+import { playerDown } from "./playerDown";
+import { IPlayer } from "../interfaces/playerInterface";
+import { IWalls } from "../interfaces/wallsInteraface";
 
-let jumpHeight = 24;
+const jumpHeight = 24;
 let jump = 0;
 
-export function movePlayer(right, left, spd, down, player, walls, ctx, up) {
-  let dir = right - left;
+export function movePlayer(right:number, left:number, spd:number, down:number, player:IPlayer, walls:IWalls[], ctx:CanvasRenderingContext2D, up:number):void {
+  const dir = right - left;
 
   for (let s = spd; s > 0; s--) {
     if (placeFree(player.x + s * dir, player.y, player, walls)) {

@@ -1,19 +1,19 @@
-import arrow from "../../img/arrow.png";
-import level1s from "../../img/level1s.mp3";
-import playerJumpSound from "../../img/player-jump-sound.mp3";
 import { drawWin } from "../drawFunctions/drawWin";
 import { drawPlayer } from "../drawFunctions/drawPlayer";
 import { draw } from "../drawFunctions/drawWalls";
 import { drawSpikes } from "../drawFunctions/drawSpikes";
 import { isSpike } from "../checkFunctions/isSpike";
 import { isWin } from "../checkFunctions/isWin";
-import { collision } from "../checkFunctions/collision";
 import { isEdge } from "../checkFunctions/isEdge";
 import { movePlayer } from "../playerMove/movePlayer";
 import { audioPlay } from "../audioFunctions/mainMusic";
+import { IPlayer } from "../interfaces/playerInterface";
+import { IWin } from "../interfaces/winInterface";
+import { ISpikes } from "../interfaces/spikesInterface";
+import { IWalls } from "../interfaces/wallsInteraface";
 
 export const level1 = {
-  render: function () {
+  render: function ():string {
     return `
         <canvas id="canvas"></canvas>
         <div class="overlay">
@@ -45,65 +45,67 @@ export const level1 = {
         </div>
 
         <div class="controls">
-        <img id="larrow" src="${arrow}">
-        <img id="rarrow" src="${arrow}">
-        <img id="darrow" src="${arrow}">
-        <img id="uarrow" src="${arrow}">
+        <img id="larrow" src="${require("../../img/arrow.png")}">
+        <img id="rarrow" src="${require("../../img/arrow.png")}">
+        <img id="darrow" src="${require("../../img/arrow.png")}">
+        <img id="uarrow" src="${require("../../img/arrow.png")}">
         </div>
-        <audio src="${playerJumpSound}" id="jump-audio"></audio>
+        <audio src="${require("../../img/player-jump-sound.mp3")}" id="jump-audio"></audio>
       `;
   },
-  functionality: () => {
-    let canvas = document.getElementById("canvas");
+  functionality: ():void => {
+    const canvas = <HTMLCanvasElement>document.getElementById("canvas");
 
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    let ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d");
 
-    let continuButton = document.getElementById("continue");
+    const continuButton = document.getElementById("continue");
+
+    const menuOverlay = document.querySelector<HTMLElement>(".menu-overlay");
 
     continuButton.onclick = function () {
-      document.querySelector(".menu-overlay").style.display = "none";
+      menuOverlay.style.display = "none";
       esc = false;
       update();
     };
 
-    document.onmousedown = function (e) {
-      if (e.target.id == "rarrow") {
+    document.onmousedown = function (e: MouseEvent) {
+      if ((e.target as Element).id == "rarrow") {
         right = 1;
         update();
       }
 
-      if (e.target.id == "larrow") {
+      if ((e.target as Element).id == "larrow") {
         left = 1;
         update();
       }
 
-      if (e.target.id == "darrow") {
+      if ((e.target as Element).id == "darrow") {
         down = 1;
         update();
       }
 
-      if (e.target.id == "uarrow") {
+      if ((e.target as Element).id == "uarrow") {
         up = 1;
         update();
       }
     };
 
-    document.onmouseup = function (e) {
-      if (e.target.id == "rarrow") {
+    document.onmouseup = function (e: MouseEvent) {
+      if ((e.target as Element).id == "rarrow") {
         right = 0;
       }
 
-      if (e.target.id == "larrow") {
+      if ((e.target as Element).id == "larrow") {
         left = 0;
       }
-      if (e.target.id == "darrow") {
+      if ((e.target as Element).id == "darrow") {
         down = 0;
       }
 
-      if (e.target.id == "uarrow") {
+      if ((e.target as Element).id == "uarrow") {
         up = 0;
       }
     };
@@ -116,7 +118,7 @@ export const level1 = {
       keyReleased(e);
     };
 
-    var keyPressed = function (e) {
+    const keyPressed = function (e: KeyboardEvent) {
       if (e.code === "KeyW") {
         up = 1;
       }
@@ -131,14 +133,14 @@ export const level1 = {
       }
       if (e.code === "Escape" && startGame) {
         esc = !esc;
-        document.querySelector(".menu-overlay").style.display = esc
+        document.querySelector<HTMLElement>(".menu-overlay").style.display = esc
           ? "block"
           : "none";
         update();
       }
     };
 
-    var keyReleased = function (e) {
+    const keyReleased = function (e: KeyboardEvent) {
       if (e.code === "KeyW") {
         up = 0;
       }
@@ -153,20 +155,20 @@ export const level1 = {
       }
     };
 
-    document.querySelector(".confirm-button").onclick = function () {
-      document.querySelector(".overlay").style.display = "none";
+    document.querySelector<HTMLElement>(".confirm-button").onclick = function () {
+      document.querySelector<HTMLElement>(".overlay").style.display = "none";
       startGame = true;
       requestAnimationFrame(update);
     };
 
-    let spikes = [
+    const spikes:ISpikes[] = [
       {
         x: 600,
         y: 528,
       },
     ];
 
-    let win = [
+    const win:IWin[] = [
       {
         x: 450,
         y: 428,
@@ -175,7 +177,7 @@ export const level1 = {
       },
     ];
 
-    let player = {
+    const player:IPlayer = {
       x: 0,
       y: 0,
       w: 50,
@@ -183,7 +185,7 @@ export const level1 = {
       c: "rgb(180,53,60)",
     };
 
-    let walls = [
+    const walls:IWalls[] = [
       {
         x: 250,
         y: 450,
@@ -222,8 +224,8 @@ export const level1 = {
       },
     ];
 
-    let spd = 5;
-    let myReq;
+    const spd = 5;
+    let myReq:undefined;
 
     let up = 0;
     let down = 0;
@@ -243,7 +245,7 @@ export const level1 = {
       draw(walls, ctx);
       drawSpikes(spikes, ctx);
       isWin(player, win, ctx);
-      let isSpikeObj = isSpike(player, spikes, ctx);
+      const isSpikeObj = isSpike(player, spikes);
 
       isSpikes = isSpikeObj.isSpikes;
 
@@ -256,6 +258,6 @@ export const level1 = {
       }
     }
 
-    //audioPlay(level1s);
+    audioPlay("../../img/level1s.mp3");
   },
 };

@@ -26,7 +26,14 @@ function setDMode() {
 
 const config = {
   target: "web",
-  entry: { index: "./src/js/index.js" },
+  entry: { index: "./src/js/index.ts" },
+  resolve: {
+    extensions: [".tsx", ".ts", ".js"],
+  },
+  node: {
+    net: "empty",
+    fs: "empty",
+  },
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "[name].js",
@@ -47,8 +54,13 @@ const config = {
         ],
       },
       {
+        test: /\.tsx?$/,
+        use: "ts-loader",
+        exclude: /node_modules/,
+      },
+      {
         test: /\.js$/,
-        use: ["babel-loader" /* , 'eslint-loader' */],
+        use: ["babel-loader", "ts-loader"],
         exclude: [/node_modules/],
       },
       {

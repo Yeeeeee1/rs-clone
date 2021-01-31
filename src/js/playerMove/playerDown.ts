@@ -1,9 +1,11 @@
 import { placeFree } from "../checkFunctions/placeFree";
+import { IPlayer } from "../interfaces/playerInterface";
+import { IWalls } from "../interfaces/wallsInteraface";
 
 let isDown = false;
 let sKeyUp = true;
 
-export function playerDown(down, player, walls, ctx) {
+export function playerDown(down:number, player:IPlayer, walls:IWalls[], ctx:CanvasRenderingContext2D):void {
   if (down) {
     ctx.clearRect(player.x, player.y, player.w, player.h);
     //player.h = 50;
@@ -13,16 +15,15 @@ export function playerDown(down, player, walls, ctx) {
     }
     isDown = true;
 
-    function downAnimation() {
+    const dan = setInterval(function () {
       if (player.h != 50) {
         ctx.clearRect(player.x, player.y, player.w, player.h);
         player.h -= 2;
       } else {
         clearInterval(dan);
       }
-    }
-
-    let dan = setInterval(downAnimation, 1000 / 60); // 60fps
+    }, 1000 / 60); // 60fps
+    
   } else if (
     isDown &&
     !placeFree(player.x, player.y + 1, player, walls) &&
@@ -35,7 +36,7 @@ export function playerDown(down, player, walls, ctx) {
         
         player.y -= 50;*/
 
-    function upAnimation() {
+    const uan = setInterval(function () {
       if (player.h != 100) {
         ctx.clearRect(player.x, player.y, player.w, player.h);
         player.h += 2;
@@ -44,9 +45,7 @@ export function playerDown(down, player, walls, ctx) {
         clearInterval(uan);
         isDown = false;
       }
-    }
-
-    let uan = setInterval(upAnimation, 1000 / 60); // 60fps
+    }, 1000 / 60); // 60fps
   } else if (!down && !placeFree(player.x, player.y - 1, player, walls)) {
     ctx.clearRect(player.x, player.y, player.w, player.h);
     player.h = 50;

@@ -1,4 +1,6 @@
-export function collision(r1, r2) {
+import { IWalls } from "../interfaces/wallsInteraface";
+
+export function collision(r1:IWalls, r2:IWalls):boolean {
   if (
     r1.x + r1.w > r2.x &&
     r1.x < r2.x + r2.w &&
