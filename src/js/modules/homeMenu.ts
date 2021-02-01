@@ -11,14 +11,18 @@ export default () => {
             color: '',
             elements: [
                 {
-                    left: null,
+                    left: {
+                        element: 'proceed-game',
+                    } ,
                     rigth: {
                         text: 'Продолжить',
                         linck: '/'
                     }
                 },
                 {
-                    left: null,
+                    left: {
+                        element: 'new-game',
+                    } ,
                     rigth: {
                         text: 'Новая игра',
                         linck: '/'
@@ -107,7 +111,9 @@ export default () => {
                     }
                 },
                 {
-                    left: null,
+                    left: {
+                        element: 's-anime',
+                    } ,
                     rigth: {
                         text: 'Анимация',
                         linck: ''
@@ -123,6 +129,8 @@ export default () => {
     }
 
     function renderMenu (value:number) {
+        const menu = <HTMLElement> document.querySelector('#menu');
+        menu.style.top = `${( document.documentElement.clientHeight / 2 )-( 38 * menuChecker )}px`;
         menuVelues[value].elements.forEach( (element:any) => {
             const li = create('li', null, null, ul)
             if (element.left !== null ) {
@@ -151,6 +159,10 @@ export default () => {
                         div.dataset.type = 'setting'
                         break;
                     }
+                    case 'new-game': {
+                        div.dataset.type = 'newGame'
+                        break;
+                    }
                     // Секция настройки
                     case 's-music': {
                         div.dataset.type = 'music'
@@ -171,7 +183,17 @@ export default () => {
                         create('label', 'switch', [
                             create('input', 'switch-shadow', null, null, ['type', 'checkbox']),
                             create('span', 'slider', null, null)
-                        ], div)
+                        ], div, ['id', 'switch'])
+                        break;
+                    }
+
+                    case 's-anime': {
+                        div.classList.add('switch-block')
+                        div.dataset.type = 'anime'
+                        create('label', 'switch', [
+                            create('input', 'switch-anime', null, null, ['type', 'checkbox']),
+                            create('span', 'slider', null, null)
+                        ], div, ['id', 'switch'])
                         break;
                     }
 
@@ -204,7 +226,7 @@ export default () => {
 
         menu.children[menuChecker].classList.add('active');
         menu.style.top = `${( document.documentElement.clientHeight / 2 )-( 38 * menuChecker )}px`;
-
+        // Обрабока влево-вправо уровни
         if (menu.children[menuChecker].querySelector('[type="radio"]')) {
             menu.children[menuChecker].children[0].children[lvlCecker*2+1].classList.remove('active')
             if (event.keyCode === 39 && lvlCecker < menu.children[menuChecker].children[0].childElementCount/2-1)
@@ -214,14 +236,40 @@ export default () => {
                 lvlCecker -= 1
 
             menu.children[menuChecker].children[0].children[lvlCecker*2+1].classList.add('active');
-            const menuRange = menu.children[menuChecker].children[0].children[lvlCecker*2] as HTMLInputElement
-            menuRange.checked = true;
+            const menuLevl = menu.children[menuChecker].children[0].children[lvlCecker*2] as HTMLInputElement
+            menuLevl.checked = true;
         }
+        // Обрабока влево-вправо "тумблер" 
+        if (menu.children[menuChecker].querySelector('[type="checkbox"]')) {
+            const menuCheckbox = menu.children[menuChecker].querySelector('[type="checkbox"]') as HTMLInputElement
+            if (event.keyCode === 39 && menuCheckbox.checked === false)
+                menuCheckbox.checked = true
+
+            if (event.keyCode === 37 && menuCheckbox.checked === true)
+                menuCheckbox.checked = false
+        }
+        // Обрабока влево-вправо range 
+        if (menu.children[menuChecker].querySelector('[type="range"]')) {
+            const menuRange = menu.children[menuChecker].querySelector('[type="range"]') as HTMLInputElement
+            if (event.keyCode === 39 && +menuRange.value <= 100)
+                menuRange.value = String(+menuRange.value + +menuRange.step)
+
+            if (event.keyCode === 37 && +menuRange.value >= 0)
+                menuRange.value = String(+menuRange.value - +menuRange.step)
+        }
+
         if (menu.children[menuChecker].querySelector('[type="range"]')) {
             const inputRange = menu.children[menuChecker].querySelector('[type="range"]') as HTMLInputElement
             inputRange.style.display = 'block'
         }
 
+        function timeOutMenu (value:number) {
+            setTimeout(() => {
+                clerMenu()
+                renderMenu(value)
+                menu.classList.remove('r-hidden')
+            }, 600)
+        }
         if (event.code === 'Enter') {
             menuChecker = 0
             lvlCecker = 0
@@ -230,17 +278,23 @@ export default () => {
             if(liActiv.querySelector('div')){
                 const divActiv = liActiv.querySelector('div')
                 if(divActiv.dataset.type === 'radio') {
-                    const currentRadio = divActiv.querySelector('[type="radio"]:checked')
+                    const currentRadio = divActiv.querySelector('[type="radio"]:checked') as HTMLInputElement
                     console.log(currentRadio)
+                    document.location.href = `${document.location.href}/#/level-${+currentRadio.value + 1}`
                 } else if (divActiv.dataset.type === 'beck' ) {
-                    clerMenu()
-                    renderMenu(0)
+                    menu.classList.add('r-hidden')
+                    timeOutMenu(0)
                 } else if (divActiv.dataset.type === 'level' ) {
-                    clerMenu()
-                    renderMenu(1)
+                    menu.classList.add('r-hidden')
+                    timeOutMenu(1)
                 } else if (divActiv.dataset.type === 'setting' ) {
+                    menu.classList.add('r-hidden')
+                    timeOutMenu(2)
+                } else if (divActiv.dataset.type === '' ) {
                     clerMenu()
                     renderMenu(2)
+                } else if (divActiv.dataset.type === 'newGame' ) {
+                    document.location.href = document.location.href + '/#/level-1'
                 }
             } else {
                 // console.log(liActiv)
@@ -251,167 +305,4 @@ export default () => {
 
 
     document.addEventListener("keydown", eventMenu)
-
-    // const ul = document.querySelector('ul')
-    // let current = 0
-    // let currentMenu = 0
-    // const levelList = ['/','/','/','/','/','/','/']
-    // const menu = [
-    //     [
-    //         ['Продолжить', 0],
-    //         ['Новая игра', 1],
-    //         ['Выбрать уровень', 2],
-    //         ['Насройка', 3],
-    //         ['Создатели', 4],
-    //         ['Выйти', 5]
-    //     ],
-    //     [
-    //         ['Назад', 99],
-    //         ['Громкость музыки', 6],
-    //         ['Громкость дейсвий', 7],
-    //         ['Анимация', 8],
-    //         ['Тени', 9],
-    //     ],
-    //     [
-    //         ['Назад', 99],
-    //         ['Глава 1', 10],
-    //     ]
-    // ]
-
-    // const creatMenu = (menuEl, currentEl) => {
-
-    //     menuEl[currentEl].forEach( (el, i) => {
-    //         const li = create('li', null, null, ul, ['pose', el[1]])
-    //         if ( i > 0 ) {
-    //             create('div', 'arrow-top', null, li)
-    //         }
-
-    //         const liContent = create('div', 'li-content', null, li)
-    //         // if( el[1] === 2) {
-    //         //     const rangeLevel = create('div', 'range-level', null, liContent)
-    //         //     create('div', 'number-level', '1', rangeLevel)
-    //         //     levelList.forEach(level => {
-    //         //         create('label', 'sq-radio', [
-    //         //             create('input', null, null, null, ['type', 'radio'], ['name', 'radio'],['checked','checked'], ['value', level]),
-    //         //             create('span', 'checkmark', null)
-    //         //         ], rangeLevel)
-    //         //     });
-    //         // }
-    //         create('a', null, el[0], liContent)
-    //         if ( i < menu[current].length - 1) {
-    //             create('div', 'arrow-bottom', null, li)
-    //         }
-    //     })
-    //     const list = document.querySelectorAll('li')
-    //     ul.style.top = '0px';
-    //     list[current].classList.add('li-activ')
-    //     // create('input', 'range-setting', null, ul, ['type', 'range'], ['min', '0'], ['max', '100'], ['step','10'])
-
-    // }
-
-    // const animation = (obj, direction) => {
-    //     const start = Date.now(); // запомнить время начала
-    //     // в то время как timePassed идёт от 0 до 2000
-    //     // left изменяет значение от 0px до 400px
-    //     const draw = () =>  {
-    //         if (direction) {
-    //             obj.style.top = +ul.style.top.slice(0,-2) + 0.7 + 'px';
-    //         } else {
-    //             obj.style.top = +ul.style.top.slice(0,-2) - 0.7 + 'px';
-    //         }
-    //     }
-    //     const timer = setInterval(() => {
-    //     // сколько времени прошло с начала анимации?
-    //     const timePassed = Date.now() - start;
-
-    //     if (timePassed >= 500) {
-    //         clearInterval(timer); // закончить анимацию через 2 секунды
-    //         return;
-    //     }
-    //     draw();
-    //     }, 20);
-    // }
-
-    // const checkArrow = (el) => {
-    //     if (el.children[0].className === 'arrow-top') {
-    //         el.children[0].style.display = 'none'
-    //     }
-    //     if (el.children[el.children.length - 1].className === 'arrow-bottom') {
-    //         el.children[el.children.length - 1].style.display = 'none'
-    //     }
-    // }
-
-    // const activArrow = (el) => {
-    //     if (el.children[0].className === 'arrow-top') {
-    //         el.children[0].style.display = 'block'
-    //     }
-    //     if (el.children[el.children.length - 1].className === 'arrow-bottom') {
-    //         el.children[el.children.length - 1].style.display = 'block'
-    //     }
-    // }
-
-    // creatMenu(menu,currentMenu)
-
-
-    // const list = document.querySelectorAll('li')
-    // ul.style.top = '0px';
-    // list[current].classList.add('li-activ')
-    // activArrow(list[current])
-
-    // document.addEventListener('keydown', (event)=>{
-    //     const list = document.querySelectorAll('li')
-    //     current
-    //     ul.style.top = '0px';
-    //     list[current].classList.add('li-activ')
-
-    //     if (event.code === 'KeyW' || event.code === 'ArrowUp' ) {
-    //         if(current === 0) {
-    //             current = 0
-    //         } else
-    //         {
-    //             current -= 1
-    //             animation(ul, true)
-    //         }
-    //     } else if (event.code === 'KeyS' || event.code === 'ArrowDown') {
-    //         if(current === list.length - 1) {
-    //             current = list.length - 1
-    //         } else
-    //         {
-    //             current += 1
-    //             animation(ul)
-    //         }
-    //     } else if (event.code === 'Enter') {
-    //         ul.classList.toggle('r-hidden')
-    //         setTimeout(()=>{
-    //             const liActiv = document.querySelector('.li-activ')
-    //             console.log(+document.querySelector('.li-activ').dataset.pose)
-    //             while (ul.children.length > 0) {
-    //                 ul.removeChild(ul.lastChild);
-    //             }
-    //             creatMenu(menu, liActiv.dataset.pose)
-    //             ul.classList.toggle('r-hidden')
-
-    //         }, 1100)
-    //     }
-
-    //     try {
-    //         list.forEach(el => {
-    //             el.classList.remove('li-activ')
-    //             checkArrow(el)
-    //         })
-    //         list[current].classList.add('li-activ')
-    //         if( list[current].querySelector('input') ) {
-    //             list[current].querySelector('input').focus()
-    //         } else {
-    //             document.querySelectorAll('input').forEach(inputEl => {
-    //                 inputEl.blur()
-    //             })
-    //         }
-    //         //
-    //         activArrow(list[current])
-    //     } catch (error) {
-    //         console.log(list)
-    //         console.error('Не удалось отоброзить',error)
-    //     }
-    // })
 }
