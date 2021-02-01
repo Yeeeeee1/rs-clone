@@ -16,7 +16,37 @@ body {
     letter-spacing: 1px;
 }
 /* DROP UL AND LI STYLES */
+.info-start{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(#009688, #ccd4d3);
+}
+
 .homePage {
+    svg {
+        margin: 0 5px;
+        position: absolute;
+    }
+
+    .about-block{
+        background: #009688c2;
+        display: flex;
+        position: fixed;
+        align-items: center;
+        justify-content: center;
+        top: 0;
+        left: 0;
+        padding: 30px;
+        height: 100vh;
+        width: 100vw;
+    }
+
     ul {
         transition: 0.5s;
     }

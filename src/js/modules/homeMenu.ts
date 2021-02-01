@@ -280,7 +280,7 @@ export default () => {
                 if(divActiv.dataset.type === 'radio') {
                     const currentRadio = divActiv.querySelector('[type="radio"]:checked') as HTMLInputElement
                     console.log(currentRadio)
-                    document.location.href = `${document.location.href}/#/level-${+currentRadio.value + 1}`
+                    document.location.href = `${document.location.origin}/#/level-${+currentRadio.value + 1}`
                 } else if (divActiv.dataset.type === 'beck' ) {
                     menu.classList.add('r-hidden')
                     timeOutMenu(0)
@@ -294,7 +294,7 @@ export default () => {
                     clerMenu()
                     renderMenu(2)
                 } else if (divActiv.dataset.type === 'newGame' ) {
-                    document.location.href = document.location.href + '/#/level-1'
+                    document.location.href = document.location.origin + '/#/level-1'
                 }
             } else {
                 // console.log(liActiv)
