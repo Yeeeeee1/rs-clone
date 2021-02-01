@@ -2,6 +2,7 @@
 import create from '../modules/createElement'
 
 export default () => {
+    
     const ul = document.querySelector('ul')
     let currentSection = 0
     const levelList = ['/','/','/','/','/','/','/','/','/']
@@ -213,10 +214,12 @@ export default () => {
                 lvlCecker -= 1
 
             menu.children[menuChecker].children[0].children[lvlCecker*2+1].classList.add('active');
-            menu.children[menuChecker].children[0].children[lvlCecker*2].checked = true;
+            const menuRange = menu.children[menuChecker].children[0].children[lvlCecker*2] as HTMLInputElement
+            menuRange.checked = true;
         }
         if (menu.children[menuChecker].querySelector('[type="range"]')) {
-            menu.children[menuChecker].querySelector('[type="range"]').style.display = 'block'
+            const inputRange = menu.children[menuChecker].querySelector('[type="range"]') as HTMLInputElement
+            inputRange.style.display = 'block'
         }
 
         if (event.code === 'Enter') {

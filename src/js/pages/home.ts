@@ -12,11 +12,9 @@ export const HomeComponent = {
         <a style="display: none" href="#/level-1">Click</a>
       </section>
       `;
-  },selectList: ():void => {
-    menu()
   },
   functionality: ():void => {
-    console.log("home page");
+    menu()
   },
 
 };

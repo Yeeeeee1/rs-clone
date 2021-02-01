@@ -1,5 +1,5 @@
 /* eslint-disable no-lonely-if */
-export default function(element, className, child, parent, ...dataAttr) {
+export default function(element: any, className: string, child: any[], parent: { appendChild: (arg0: any) => void; }, ...dataAttr: any[]) {
     const el = document.createElement(element);
     if (className) {
       el.classList.add(...className.split(' '));
