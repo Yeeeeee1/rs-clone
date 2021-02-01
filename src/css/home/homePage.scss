@@ -1,0 +1,360 @@
+$colorHomeMenuFont: #3a1b5e;
+$colorSettingMenuFont: #ad2f19;
+$colorLevelMenuFont: #23755f;
+
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&family=Poiret+One&display=swap');
+
+body {
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100vh;
+    background: radial-gradient(#ffffff 50%, #cbd3d2 75%, #ffffff) no-repeat;
+    background-size: cover;
+    font-family: 'Comfortaa', cursive;
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+/* DROP UL AND LI STYLES */
+ul#menu {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+ }
+
+ul#menu li { padding-left: 0; }
+
+/* NEW STYLES FOR UL AND LI */
+body { overflow: hidden; }
+
+ul#menu {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transition: top ease-in-out 0.5s;
+}
+
+ul#menu li {
+    display: flex;
+    position: relative;
+    padding: 10px;
+    padding-right: 150px;
+    margin: 25px 0;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+
+}
+
+ul#menu li:first-child { margin-top: 0; }
+
+ul#menu li:last-child { margin-bottom: 0; }
+
+ul#menu li.active:after,
+ul#menu li.active:before {
+    height: auto;
+    position: absolute;
+    right: 60px;
+    color: #009688;
+}
+
+ul#menu li.active:after {
+    content: "\25BC";
+    top: 42px;
+}
+
+ul#menu li.active:before {
+    content: "\25B2";
+    bottom: 42px;
+}
+
+ul#menu li div,
+ul#menu li:last-child:after,
+ul#menu li:first-child:before {
+    display: none;
+}
+
+ul#menu li.active div { display: flex; }
+
+ul#menu li.active {
+    background-color: #009688;
+    color: #ffffff;
+    flex-direction: row;
+}
+
+ul#menu input { display: none; }
+
+ul#menu li label {
+    width: 18px;
+    height: 18px;
+    background-color: #ededed;
+    margin: 0 5px;
+}
+ul#menu li label.active {
+    width: 28px;
+    height: 28px;
+    background-color: #ffffff;
+    margin: -5px 5px;
+}
+
+li {
+    display: flex;
+    justify-content: end;
+}
+
+.range-setting {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 1px;
+    background: $colorSettingMenuFont;
+    outline: none;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.range-setting:hover {
+    opacity: 1;
+}
+
+.range-setting::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 28px;
+    height: 28px;
+    background: $colorSettingMenuFont;
+    cursor: pointer;
+}
+
+.range-setting::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: $colorSettingMenuFont;
+    cursor: pointer;
+}
+
+.range-block {
+    display: flex;
+    align-items: center;
+    padding-right: 20px;
+}
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+
+  .switch input {display:none;}
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
+  input:checked + .slider {
+    background-color: #2196F3;
+  }
+
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+// .homePage {
+//     font-family: 'Comfortaa', cursive;
+//     font-size: 15px;
+//     letter-spacing: 1px;
+//     min-width: 40%;
+
+//     .r-hidden {
+//         transform: translateX(100%);
+//     }
+
+//     ul {
+//         position: relative;
+//         right: 0;
+//         top: 50;
+//         transition: 1s;
+//     }
+//     li {
+//         text-transform: uppercase;
+//         list-style-type: none;
+//         color: $colorHomeMenuFont;
+//         padding: 10px;
+
+//         .arrow-bottom {
+//             background: $colorHomeMenuFont;
+//             position: relative;
+//             bottom: -15px;
+//             color: #fff;
+//             display: none;
+//         }
+//         .arrow-bottom::after {
+//             content: '';
+//             position: absolute;
+//             right: 10px;
+//             border: 10px solid transparent; /* Прозрачные границы */
+//             border-top: 10px solid $colorHomeMenuFont; /* Добавляем треугольник */
+//         }
+
+//         .arrow-top {
+//             background: $colorHomeMenuFont;
+//             position: relative;
+//             bottom: 35px;
+//             color: #fff;
+//             display: none;
+//         }
+//         .arrow-top::after {
+//             content: '';
+//             position: absolute; /* Абсолютное позиционирование */
+//             right: 10px;
+//             border: 10px solid transparent;
+//             border-bottom: 10px solid $colorHomeMenuFont;
+//         }
+//     }
+
+//     .li-activ {
+//         background-color: $colorHomeMenuFont;
+//         color: #ffffff;
+//     }
+
+//     .range-setting {
+//         -webkit-appearance: none;
+//         width: 100%;
+//         height: 1px;
+//         background: $colorSettingMenuFont;
+//         outline: none;
+//         -webkit-transition: .2s;
+//         transition: opacity .2s;
+//       }
+
+//       .range-setting:hover {
+//         opacity: 1;
+//       }
+
+//       .range-setting::-webkit-slider-thumb {
+//         -webkit-appearance: none;
+//         appearance: none;
+//         width: 25px;
+//         height: 25px;
+//         background: $colorSettingMenuFont;
+//         cursor: pointer;
+//       }
+
+//       .range-setting::-moz-range-thumb {
+//         width: 25px;
+//         height: 25px;
+//         background: $colorSettingMenuFont;
+//         cursor: pointer;
+//       }
+
+//       .range-level {
+//         background: $colorHomeMenuFont;
+//         height: 37px;
+//         width: 100%;
+//         display: flex;
+//         align-items: center;
+//         justify-content: space-around;
+//         transform: translate(-100%,-27%);
+//         position: absolute;
+//         padding-right: 10px;
+
+//         .number-level {
+//             top: -20px;
+//             left: 0px;
+//             position: absolute;
+//         }
+
+//         .sq-radio {
+//             display: block;
+//             position: relative;
+//             // padding-left: 35px;
+//             // margin-bottom: 12px;
+//             cursor: pointer;
+//             // font-size: 22px;
+//             -webkit-user-select: none;
+//             -moz-user-select: none;
+//             -ms-user-select: none;
+//             user-select: none;
+//           }
+//           /* Hide the browser's default radio button */
+//         .sq-radio input {
+//             position: absolute;
+//             opacity: 0;
+//             cursor: pointer;
+//         }
+
+//         /* Create a custom radio button */
+//         .checkmark {
+//             position: absolute;
+//             top: -4px;
+//             width: 10px;
+//             height: 10px;
+//             background-color: #fff;
+//         }
+
+//         /* When the radio button is checked, add a blue background
+//         .sq-radio input:checked ~ .checkmark {
+//             background-color: #241d25;
+//         }
+//         */
+//         /* Create the indicator (the dot/circle - hidden when not checked) */
+//         .checkmark:after {
+//             content: "";
+//             position: absolute;
+//             display: none;
+//         }
+
+//         /* Show the indicator (dot/circle) when checked */
+//         .sq-radio input:checked ~ .checkmark:after {
+//             display: block;
+//         }
+
+//         /* Style the indicator (dot/circle) */
+//         .sq-radio .checkmark:after {
+//             top: -7px;
+//             left: -6px;
+//             width: 23px;
+//             height: 23px;
+//             background-color: #ffffff;
+//         }
+
+//         div {
+//             background: #ffffff;
+//             width: 10px;
+//             height: 10px;
+
+//         }
+
+//         .activ-block {
+//             width: 23px;
+//             height: 23px;
+//         }
+
+//     }
+// }
+
+
