@@ -11,6 +11,7 @@ import { IPlayer } from "../interfaces/playerInterface";
 import { IWin } from "../interfaces/winInterface";
 import { ISpikes } from "../interfaces/spikesInterface";
 import { IWalls } from "../interfaces/wallsInteraface";
+import { IStatistics } from "../interfaces/statisticsInterface";
 
 export const level1 = {
   render: function ():string {
@@ -54,6 +55,31 @@ export const level1 = {
       `;
   },
   functionality: ():void => {
+
+    
+
+    let level = 1;
+
+    let statistics:IStatistics = {
+      lose: 0,
+      winLevels: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    };
+
+    console.log(JSON.parse(localStorage.getItem("statistics")));
+
+    if (!localStorage.getItem("statistics")) {
+      localStorage.setItem("statistics", JSON.stringify(statistics));
+    } else {
+      statistics = JSON.parse(localStorage.getItem("statistics"));
+    }
+    
+
+    
+
+    localStorage.setItem("level", "1");
+
+    
+
     const canvas = <HTMLCanvasElement>document.getElementById("canvas");
 
     canvas.width = window.innerWidth;
@@ -194,7 +220,7 @@ export const level1 = {
       },
       {
         x: 0,
-        y: canvas.height - canvas.height / 2,
+        y: canvas.height / 2 + (1015 - screen.height),
         w: 2000,
         h: canvas.height / 2,
       },
@@ -244,12 +270,19 @@ export const level1 = {
       drawPlayer(player, ctx);
       draw(walls, ctx);
       drawSpikes(spikes, ctx);
-      isWin(player, win, ctx);
+      isWin(player, win, ctx, level, statistics);
       const isSpikeObj = isSpike(player, spikes);
 
       isSpikes = isSpikeObj.isSpikes;
 
       startGame = isSpikeObj.startGame;
+
+      if (isSpikes) {
+        statistics.lose++;
+        localStorage.setItem("statistics", JSON.stringify(statistics));
+      }
+
+      
 
       if (!esc && !isSpikes) {
         requestAnimationFrame(update);
