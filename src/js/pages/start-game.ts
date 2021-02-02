@@ -1,4 +1,4 @@
-import menu from '../modules/homeMenu.ts'
+import menu from '../modules/homeMenu'
 
 export const StartGame = {
     render: ():string => {

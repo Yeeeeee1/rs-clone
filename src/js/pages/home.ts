@@ -1,5 +1,5 @@
 import '../../css/pages/homePage.scss'
-import menu from '../modules/startMenu.ts'
+import menu from '../modules/startMenu'
 
 export const HomeComponent = {
   render: ():string => {

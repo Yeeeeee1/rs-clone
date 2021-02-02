@@ -133,20 +133,20 @@ export default () => {
         const menu = <HTMLElement> document.querySelector('#menu');
         document.querySelectorAll('li.active').forEach(el => el.classList.remove('active'));
         document.querySelectorAll('label.active').forEach(el => el.classList.remove('active'));
-        if (event.keyCode === 38 && menuChecker > 0)
+        if ( (event.keyCode === 38 && menuChecker > 0) || (event.code == 'KeyW' && menuChecker > 0))
             menuChecker -= 1;
 
-        if (event.keyCode === 40 && menuChecker < menu.childElementCount - 1)
+        if ( (event.keyCode === 40 && menuChecker < menu.childElementCount - 1) || (event.code === 'KeyS' && menuChecker < menu.childElementCount - 1))
             menuChecker += 1;
-
-        if (event.keyCode === 38 || event.keyCode === 40)
+        
+        if ((event.keyCode === 38 ||  event.keyCode === 40 )|| (event.code === 'KeyW' ||event.code === 'KeyS') )
             lvlCecker = 0;
 
         menu.children[menuChecker].classList.add('active');
         menu.style.top = `${( document.documentElement.clientHeight / 2 )-( 38 * menuChecker )}px`;
 
 
-        if (event.code === 'Enter') {
+        if (event.code === 'Enter' || event.code === 'Space')  {
             menuChecker = 0
             lvlCecker = 0
             const liActiv = document.querySelector('.active')
@@ -154,7 +154,7 @@ export default () => {
             if(liActiv.querySelector('div')){
                 const divActiv = liActiv.querySelector('div')
                 if(divActiv.dataset.type === 'startGame') {
-                    document.location.href = `${document.location.href}#/start-game`
+                    document.location.href = `${document.location.origin}#/start-game`
                 } 
                 else if (divActiv.dataset.type === 'Yeeeeee1' ) {
                     document.location.href = `https://github.com/Yeeeeee1`
