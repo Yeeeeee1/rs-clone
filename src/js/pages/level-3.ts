@@ -13,7 +13,7 @@ import { ISpikes } from "../interfaces/spikesInterface";
 import { IWalls } from "../interfaces/wallsInteraface";
 import { IStatistics } from "../interfaces/statisticsInterface";
 
-export const level1 = {
+export const level3 = {
   render: function ():string {
     return `
         <canvas id="canvas"></canvas>
@@ -21,7 +21,7 @@ export const level1 = {
         <div class="modal">
         <h1>Hello!</h1>
 
-        <h3>MOVEMENT - A(left) D(right) | ESC - menu</h3>
+        <h3>MOVEMENT - A(left) D(right) | JUMP - W | ESC - menu</h3>
 
         <button class="confirm-button">OK</button>
         </div>
@@ -58,7 +58,7 @@ export const level1 = {
 
     
 
-    let level = 1;
+    let level = 3;
 
     let statistics:IStatistics = {
       lose: 0,
@@ -193,7 +193,7 @@ export const level1 = {
 
     const win:IWin[] = [
       {
-        x: 600,
+        x: 1100,
         y: 428,
         w: 50,
         h: 100,
@@ -209,6 +209,24 @@ export const level1 = {
     };
 
     const walls:IWalls[] = [
+      {
+        x: 500,
+        y: 428,
+        w: 100,
+        h: 100,
+      },
+      {
+        x: 700,
+        y: 328,
+        w: 100,
+        h: 200,
+      },
+      {
+        x: 900,
+        y: 168,
+        w: 100,
+        h: 400,
+      },
       {
         x: 0,
         y: canvas.height / 2 + (1015 - screen.height),

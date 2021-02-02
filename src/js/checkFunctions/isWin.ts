@@ -19,7 +19,7 @@ export function isWin(player:IPlayer, win:IWin[], ctx:CanvasRenderingContext2D, 
           clearInterval(jan);
           statistics.winLevels[level-1] = 1;
           localStorage.setItem("statistics", JSON.stringify(statistics));
-          location.href = "#/level-2";
+          location.href = `#/level-${level+1}`;
         }
       }, 1000 / 60); // 60fps
 
