@@ -1,4 +1,4 @@
-import { HomeComponent, level1, StartGame, ErrorComponent, level2, level3, level4, level5 } from "../pages/index";
+import { HomeComponent, level1, StartGame, ErrorComponent, level2, level3, level4, level5, level6, level7, level8, level9, level10 } from "../pages/index";
 
 
 
@@ -13,6 +13,12 @@ const routes:{path:string, component:{render:() => string ,functionality:() => v
   { path: '/level-3', component: level3 },
   { path: '/level-4', component: level4 },
   { path: '/level-5', component: level5 },
+  { path: '/level-6', component: level6 },
+  { path: '/level-7', component: level7 },
+  { path: '/level-8', component: level8 },
+  { path: '/level-9', component: level9 },
+  { path: '/level-10', component: level10 },
+
 ];
 
 const parseLocation = ():string => location.hash.slice(1).toLowerCase() || '/';
