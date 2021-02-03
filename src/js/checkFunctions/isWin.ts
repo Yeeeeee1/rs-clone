@@ -1,7 +1,8 @@
 import { IPlayer } from "../interfaces/playerInterface";
 import { IWin } from "../interfaces/winInterface";
+import { IStatistics } from "../interfaces/statisticsInterface";
 
-export function isWin(player:IPlayer, win:IWin[], ctx:CanvasRenderingContext2D):void {
+export function isWin(player:IPlayer, win:IWin[], ctx:CanvasRenderingContext2D, level:number, statistics:IStatistics):void {
   for (let i = 0; i < win.length; i++) {
     if (
       player.x + 25 >= win[i].x &&
@@ -16,7 +17,16 @@ export function isWin(player:IPlayer, win:IWin[], ctx:CanvasRenderingContext2D):
           player.w--;
         } else {
           clearInterval(jan);
-          location.href = "#/level-2";
+          statistics.winLevels[level-1] = 1;
+          localStorage.setItem("statistics", JSON.stringify(statistics));
+          if (level != 10) {
+            location.href = `#/level-${level+1}`;
+          } else {
+            document.body.innerHTML = "Вы прошли игру!";
+            location.href = "#/start-game";
+            
+          }
+          
         }
       }, 1000 / 60); // 60fps
 
