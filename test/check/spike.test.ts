@@ -1,4 +1,4 @@
-import { isSpike } from '../../src/js/checkFunctions/isSpike';
+/*import { isSpike } from '../../src/js/checkFunctions/isSpike';
 
 describe('isSpike', () => {
 
@@ -6,4 +6,4 @@ describe('isSpike', () => {
 		expect()
 	});
 
-});
+});*/
