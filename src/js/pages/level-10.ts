@@ -53,6 +53,14 @@ export const level10 = {
         </div>
         <audio src="${require("../../img/player-jump-sound.mp3")}" id="jump-audio"></audio>
         <audio src="${require("../../img/level10s.mp3")}" id="music"></audio>
+
+        <div class="overlay-win">
+        <div class="modal-win">
+        <h1>You are win!</h1>
+        <button onclick="location.href='#/start-game'" class="red-win">Main menu</button>
+        </div>
+        </div>
+        
       `;
   },
   functionality: ():void => {

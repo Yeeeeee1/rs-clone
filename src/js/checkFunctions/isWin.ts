@@ -23,8 +23,8 @@ const jan = setInterval(function ():void {
           if (level != 10) {
             location.href = `#/level-${level+1}`;
           } else {
-            document.body.innerHTML = "Вы прошли игру!";
-            location.href = "#/start-game";
+            document.querySelector<HTMLElement>(".overlay-win").style.display = "block";
+            document.querySelector<HTMLElement>(".modal-win").style.display = "block";
             
           }
           
@@ -36,8 +36,8 @@ const jan = setInterval(function ():void {
           if (level != 10) {
             location.href = `#/level-${level+1}`;
           } else {
-            document.body.innerHTML = "Вы прошли игру!";
-            location.href = "#/start-game";
+            document.querySelector<HTMLElement>(".overlay-win").style.display = "block";
+            document.querySelector<HTMLElement>(".modal-win").style.display = "block";
             
           }
       }
