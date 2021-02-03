@@ -1,0 +1,207 @@
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  left: 0;
+  top: 0;
+}
+
+.modal {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  background: white;
+  left: 25%;
+  top: 25%;
+  opacity: 1;
+  z-index: 1001;
+  -webkit-animation-name: animatetop;
+          animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+          animation-duration: 0.4s;
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+@-webkit-keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+.confirm-button {
+  background-color: #4caf50;
+  /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+  background-color: #231438;
+  position: absolute;
+}
+
+.menu {
+  width: 350px;
+  height: 150px;
+  background-color: steelblue;
+  border-radius: 10px;
+  position: absolute;
+  z-index: 1002;
+  top: 45%;
+  left: 45%;
+}
+
+.menu-overlay {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  left: 0;
+  top: 0;
+}
+
+.controls {
+  display: none;
+  width: 90%;
+  margin: 0 auto;
+  position: absolute;
+  height: 300px;
+  top: 70%;
+  left: 20%;
+}
+
+@media screen and (max-width: 1300px) {
+  .controls {
+    display: block;
+  }
+}
+
+.controls img {
+  width: 200px;
+  height: 100px;
+}
+
+.controls img:nth-child(2) {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+.controls img:nth-child(3) {
+  -webkit-transform: rotate(270deg);
+          transform: rotate(270deg);
+}
+
+.controls img:nth-child(4) {
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+
+.menu button {
+  position: relative;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+  margin: 0 auto;
+  width: 200px;
+  height: 25px;
+  background-color: teal;
+  border: 0;
+  border-radius: 5px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.menu-restart-overlay {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  left: 0;
+  top: 0;
+}
+
+.menu-restart {
+  width: 350px;
+  height: 250px;
+  background-color: steelblue;
+  border-radius: 10px;
+  position: absolute;
+  z-index: 1002;
+  top: 45%;
+  left: 45%;
+}
+
+.menu-restart button {
+  position: relative;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+  margin: 0 auto;
+  width: 200px;
+  height: 25px;
+  background-color: teal;
+  border: 0;
+  border-radius: 5px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.menu-restart h3 {
+  position: relative;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+  width: 200px;
+  height: 25px;
+  text-align: center;
+}
+/*# sourceMappingURL=style.css.map */
