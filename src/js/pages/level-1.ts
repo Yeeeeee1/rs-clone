@@ -158,13 +158,15 @@ export const level1 = {
       if (e.code === "KeyD") {
         right = 1;
       }
-      if (e.code === "Escape" && startGame) {
+      if (e.code === "Escape" && document.querySelector<HTMLElement>(".overlay").style.display == "none") {
+        
         esc = !esc;
         document.querySelector<HTMLElement>(".menu-overlay").style.display = esc
           ? "block"
           : "none";
         update();
       }
+      
     };
 
     const keyReleased = function (e: KeyboardEvent) {
@@ -184,7 +186,7 @@ export const level1 = {
 
     document.querySelector<HTMLElement>(".confirm-button").onclick = function () {
       document.querySelector<HTMLElement>(".overlay").style.display = "none";
-      startGame = true;
+      
       requestAnimationFrame(update);
     };
 
