@@ -1,15 +1,16 @@
+import menu from '../modules/homeMenu'
+
 export const StartGame = {
     render: ():string => {
       return `
-        <section>
-          <h1>Start game</h1>
-          <p>This is just a test</p>
-          <a href="#/level-1">Click</a>
-        </section>
+      <section class='homePage'>
+        <ul id="menu"></ul>
+        <input id="blur-hack" type="text" style="position: absolute; opacity: 0;">
+      </section>
       `;
     },
 
     functionality: ():void => {
-      console.log("start game page");
+      menu()
     }
   } 

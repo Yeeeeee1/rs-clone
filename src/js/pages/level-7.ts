@@ -52,6 +52,7 @@ export const level7 = {
         <img id="uarrow" src="${require("../../img/arrow.png")}">
         </div>
         <audio src="${require("../../img/player-jump-sound.mp3")}" id="jump-audio"></audio>
+        <audio src="${require("../../img/level1s.mp3")}" id="music"></audio>
       `;
   },
   functionality: ():void => {
@@ -290,6 +291,6 @@ export const level7 = {
       }
     }
 
-    audioPlay("../../img/level1s.mp3");
+    audioPlay();
   },
 };

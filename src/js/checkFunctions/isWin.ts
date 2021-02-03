@@ -11,7 +11,8 @@ export function isWin(player:IPlayer, win:IWin[], ctx:CanvasRenderingContext2D, 
     ) {
       player.c = "white";
 
-      const jan = setInterval(function ():void {
+      if (JSON.parse(localStorage.getItem("setting")).switchAnimation) {
+const jan = setInterval(function ():void {
         if (player.w != 0) {
           ctx.clearRect(player.x, player.y, player.w, player.h);
           player.w--;
@@ -29,9 +30,21 @@ export function isWin(player:IPlayer, win:IWin[], ctx:CanvasRenderingContext2D, 
           
         }
       }, 1000 / 60); // 60fps
+      } else {
+        statistics.winLevels[level-1] = 1;
+          localStorage.setItem("statistics", JSON.stringify(statistics));
+          if (level != 10) {
+            location.href = `#/level-${level+1}`;
+          } else {
+            document.body.innerHTML = "Вы прошли игру!";
+            location.href = "#/start-game";
+            
+          }
+      }
+      
 
     } else {
-      player.c = "rgb(180,53,60)";
+      player.c = JSON.parse(localStorage.getItem("setting")).colorHero;
     }
   }
 }
