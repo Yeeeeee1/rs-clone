@@ -191,14 +191,14 @@ export const level9 = {
     const spikes:ISpikes[] = [
         {
             x: 800,
-            y: 528,
+            y: canvas.height / 2,
         },
     ];
 
     const win:IWin[] = [
       {
         x: 500,
-        y: 68,
+        y: canvas.height / 2 - 425,
         w: 50,
         h: 100,
       },
@@ -215,26 +215,26 @@ export const level9 = {
     const walls:IWalls[] = [
         {
             x: 500,
-            y: 168,
+            y: canvas.height / 2 - 325,
             w: 500,
             h: 50,
           },
           
           {
             x: 1100,
-            y: 268,
+            y: canvas.height / 2 - 200,
             w: 100,
             h: 200,
           },
           {
             x: 500,
-            y: 268,
+            y: canvas.height / 2 - 225,
             w: 100,
             h: 300,
           },
       {
         x: 0,
-        y: canvas.height / 2 + (1015 - screen.height),
+        y: canvas.height / 2,
         w: 2000,
         h: canvas.height / 2,
       },

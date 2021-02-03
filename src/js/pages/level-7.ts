@@ -191,18 +191,18 @@ export const level7 = {
     const spikes:ISpikes[] = [
         {
             x: 700,
-            y: 528,
+            y: canvas.height / 2,
         },
         {
             x: 900,
-            y: 528,
+            y: canvas.height / 2,
         },
     ];
 
     const win:IWin[] = [
       {
         x: 1100,
-        y: 428,
+        y: canvas.height / 2 - 100,
         w: 50,
         h: 100,
       },
@@ -221,17 +221,17 @@ export const level7 = {
             x: 500,
             y: 0,
             w: 100,
-            h: 378,
+            h: canvas.height / 2 - 150,
           },
           {
             x: 500,
-            y: 428,
+            y: canvas.height / 2 - 100,
             w: 100,
             h: 100,
           },
       {
         x: 0,
-        y: canvas.height / 2 + (1015 - screen.height),
+        y: canvas.height / 2,
         w: 2000,
         h: canvas.height / 2,
       },

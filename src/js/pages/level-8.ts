@@ -212,20 +212,20 @@ export const level8 = {
     const walls:IWalls[] = [
       {
         x: 500,
-        y: 168,
+        y: canvas.height / 2 - 209,
         w: 500,
         h: 50,
       },
       
       {
         x: 1100,
-        y: 268,
+        y: canvas.height / 2 - 200,
         w: 100,
         h: 200,
       },
       {
         x: 0,
-        y: canvas.height / 2 + (1015 - screen.height),
+        y: canvas.height / 2,
         w: 2000,
         h: canvas.height / 2,
       },
