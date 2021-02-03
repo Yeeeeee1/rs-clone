@@ -191,34 +191,34 @@ export const level4 = {
     const spikes:ISpikes[] = [
       {
           x: 400,
-          y: 528,
+          y: canvas.height / 2,
       },
       {
           x: 500,
-          y: 528,
+          y: canvas.height / 2,
       },
       {
         x: 600,
-        y: 528,
+        y: canvas.height / 2,
     },
     {
         x: 700,
-        y: 528,
+        y: canvas.height / 2,
     },
     {
         x: 800,
-        y: 528,
+        y: canvas.height / 2,
     },
     {
         x: 900,
-        y: 528,
+        y: canvas.height / 2,
     },
     ];
 
     const win:IWin[] = [
       {
         x: 1200,
-        y: 428,
+        y: canvas.height / 2 - 100,
         w: 50,
         h: 100,
       },
@@ -235,19 +235,19 @@ export const level4 = {
     const walls:IWalls[] = [
       {
         x: 300,
-        y: 428,
+        y: canvas.height / 2 - 100,
         w: 100,
         h: 100,
       },
       {
         x: 1000,
-        y: 428,
+        y: canvas.height / 2 - 100,
         w: 100,
         h: 100,
       },
       {
         x: 0,
-        y: canvas.height / 2 + (1015 - screen.height),
+        y: canvas.height / 2,
         w: 2000,
         h: canvas.height / 2,
       },

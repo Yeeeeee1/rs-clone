@@ -197,7 +197,7 @@ export const level1 = {
     const win:IWin[] = [
       {
         x: 600,
-        y: 428,
+        y: canvas.height / 2 - 100,
         w: 50,
         h: 100,
       },
@@ -214,7 +214,7 @@ export const level1 = {
     const walls:IWalls[] = [
       {
         x: 0,
-        y: canvas.height / 2 + (1015 - screen.height),
+        y: canvas.height / 2,
         w: 2000,
         h: canvas.height / 2,
       },
