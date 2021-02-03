@@ -10,7 +10,8 @@
     "dev": "webpack-dev-server --history-api-fallback --inline --open",
     "build": "npm run clear -s && webpack --progress",
     "lint": "eslint ./**/*.js",
-    "clear": "del-cli dist"
+    "clear": "del-cli dist",
+    "test": "jest"
   },
   "author": "Netizen",
   "license": "ISC",
@@ -50,7 +51,7 @@
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^4.45.0",
     "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.1"
+    "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
     "collisions": "^2.0.13",

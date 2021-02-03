@@ -13,6 +13,7 @@ export function playerJump(jump:number, up:number, player:IPlayer, walls:IWalls[
   }
   
     const audio = document.querySelector<HTMLAudioElement>("#jump-audio");
+    audio.volume = JSON.parse(localStorage.getItem("setting")).volumeAction / 100;
     audio.play();
     setTimeout(function () {
       audio.pause();

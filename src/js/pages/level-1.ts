@@ -11,6 +11,7 @@ import { IPlayer } from "../interfaces/playerInterface";
 import { IWin } from "../interfaces/winInterface";
 import { ISpikes } from "../interfaces/spikesInterface";
 import { IWalls } from "../interfaces/wallsInteraface";
+import { IStatistics } from "../interfaces/statisticsInterface";
 
 export const level1 = {
   render: function ():string {
@@ -51,9 +52,35 @@ export const level1 = {
         <img id="uarrow" src="${require("../../img/arrow.png")}">
         </div>
         <audio src="${require("../../img/player-jump-sound.mp3")}" id="jump-audio"></audio>
+        <audio src="${require("../../img/level1s.mp3")}" id="music"></audio>
       `;
   },
   functionality: ():void => {
+
+    
+
+    let level = 1;
+
+    let statistics:IStatistics = {
+      lose: 0,
+      winLevels: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    };
+
+    
+
+    if (!localStorage.getItem("statistics")) {
+      localStorage.setItem("statistics", JSON.stringify(statistics));
+    } else {
+      statistics = JSON.parse(localStorage.getItem("statistics"));
+    }
+    
+
+    
+
+    localStorage.setItem("level", `${level}`);
+
+    
+
     const canvas = <HTMLCanvasElement>document.getElementById("canvas");
 
     canvas.width = window.innerWidth;
@@ -131,13 +158,15 @@ export const level1 = {
       if (e.code === "KeyD") {
         right = 1;
       }
-      if (e.code === "Escape" && startGame) {
+      if (e.code === "Escape" && document.querySelector<HTMLElement>(".overlay").style.display == "none") {
+        
         esc = !esc;
         document.querySelector<HTMLElement>(".menu-overlay").style.display = esc
           ? "block"
           : "none";
         update();
       }
+      
     };
 
     const keyReleased = function (e: KeyboardEvent) {
@@ -157,20 +186,17 @@ export const level1 = {
 
     document.querySelector<HTMLElement>(".confirm-button").onclick = function () {
       document.querySelector<HTMLElement>(".overlay").style.display = "none";
-      startGame = true;
+      
       requestAnimationFrame(update);
     };
 
     const spikes:ISpikes[] = [
-      {
-        x: 600,
-        y: 528,
-      },
+      
     ];
 
     const win:IWin[] = [
       {
-        x: 450,
+        x: 600,
         y: 428,
         w: 50,
         h: 100,
@@ -187,29 +213,12 @@ export const level1 = {
 
     const walls:IWalls[] = [
       {
-        x: 250,
-        y: 450,
-        w: 100,
-        h: 100,
-      },
-      {
         x: 0,
-        y: canvas.height - canvas.height / 2,
+        y: canvas.height / 2 + (1015 - screen.height),
         w: 2000,
         h: canvas.height / 2,
       },
-      {
-        x: 100,
-        y: 0,
-        w: 100,
-        h: 200,
-      },
-      {
-        x: 250,
-        y: 300,
-        w: 100,
-        h: 100,
-      },
+      
       {
         x: -700,
         y: -300,
@@ -244,12 +253,19 @@ export const level1 = {
       drawPlayer(player, ctx);
       draw(walls, ctx);
       drawSpikes(spikes, ctx);
-      isWin(player, win, ctx);
+      isWin(player, win, ctx, level, statistics);
       const isSpikeObj = isSpike(player, spikes);
 
       isSpikes = isSpikeObj.isSpikes;
 
       startGame = isSpikeObj.startGame;
+
+      if (isSpikes) {
+        statistics.lose++;
+        localStorage.setItem("statistics", JSON.stringify(statistics));
+      }
+
+      
 
       if (!esc && !isSpikes) {
         requestAnimationFrame(update);
@@ -258,6 +274,6 @@ export const level1 = {
       }
     }
 
-    audioPlay("../../img/level1s.mp3");
+    audioPlay();
   },
 };

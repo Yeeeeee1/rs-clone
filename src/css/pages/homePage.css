@@ -1,0 +1,282 @@
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa&family=Poiret+One&display=swap");
+body {
+  overflow: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  height: 100vh;
+  background: radial-gradient(#ffffff 50%, #cbd3d2 75%, #ffffff) no-repeat;
+  background-size: cover;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+/* DROP UL AND LI STYLES */
+.info-start {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: -webkit-gradient(linear, left top, left bottom, from(#009688), to(#ccd4d3));
+  background: linear-gradient(#009688, #ccd4d3);
+}
+
+.homePage {
+  /* NEW STYLES FOR UL AND LI */
+}
+
+.homePage svg {
+  margin: 0 5px;
+  position: absolute;
+}
+
+.homePage .about-block {
+  background: #009688c2;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: fixed;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  top: 0;
+  left: 0;
+  padding: 30px;
+  height: 100vh;
+  width: 100vw;
+}
+
+.homePage ul {
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.homePage ul#menu {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  font-family: 'Comfortaa', cursive;
+}
+
+.homePage ul#menu li {
+  padding-left: 0;
+}
+
+.homePage body {
+  overflow: hidden;
+}
+
+.homePage ul#menu {
+  position: absolute;
+  top: 50%;
+  right: 0;
+}
+
+.homePage ul#menu li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  padding: 10px;
+  padding-right: 150px;
+  margin: 25px 0;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+}
+
+.homePage ul#menu li:first-child {
+  margin-top: 0;
+}
+
+.homePage ul#menu li:last-child {
+  margin-bottom: 0;
+}
+
+.homePage ul#menu li.active:after,
+.homePage ul#menu li.active:before {
+  height: auto;
+  position: absolute;
+  right: 60px;
+  color: #009688;
+}
+
+.homePage ul#menu li.active:after {
+  content: "\25BC";
+  top: 42px;
+  font-size: 30px;
+}
+
+.homePage ul#menu li.active:before {
+  content: "\25B2";
+  bottom: 42px;
+  font-size: 30px;
+}
+
+.homePage ul#menu li div,
+.homePage ul#menu li:last-child:after,
+.homePage ul#menu li:first-child:before {
+  display: none;
+}
+
+.homePage ul#menu li.active div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.homePage ul#menu li.active {
+  background-color: #009688;
+  color: #ffffff;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.homePage ul#menu input {
+  display: none;
+}
+
+.homePage ul#menu li label {
+  width: 18px;
+  height: 18px;
+  background-color: #ededed;
+  margin: 0 5px;
+}
+
+.homePage ul#menu li label.active {
+  width: 28px;
+  height: 28px;
+  background-color: #ffffff;
+  margin: -5px 5px;
+}
+
+.homePage li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: end;
+}
+
+.homePage .range-setting {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 1px;
+  background: #ffffff;
+  outline: none;
+  -webkit-transition: .2s;
+  -webkit-transition: opacity .2s;
+  transition: opacity .2s;
+}
+
+.homePage .range-setting:hover {
+  opacity: 1;
+}
+
+.homePage .range-setting::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 28px;
+  height: 28px;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+.homePage .range-setting::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+.homePage .range-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-right: 20px;
+}
+
+.homePage div.switch-block #switch.switch {
+  position: absolute;
+  top: 5px;
+  display: inline-block;
+  width: 49px;
+  height: 28px;
+}
+
+.homePage div.switch-block .switch input {
+  display: none;
+}
+
+.homePage div.switch-block .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ffffff;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.homePage div.switch-block .slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 21px;
+  left: 4px;
+  bottom: 4px;
+  background-color: #009688;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.homePage div.switch-block input:checked + .slider {
+  background-color: #90ccc6;
+}
+
+.homePage div.switch-block input:focus + .slider {
+  -webkit-box-shadow: 0 0 1px #90ccc6;
+          box-shadow: 0 0 1px #90ccc6;
+}
+
+.homePage div.switch-block input:checked + .slider:before {
+  -webkit-transform: translateX(20px);
+  transform: translateX(20px);
+}
+
+.homePage .r-hidden {
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+}
+/*# sourceMappingURL=homePage.css.map */
