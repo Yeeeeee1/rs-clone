@@ -408,7 +408,14 @@ export default () => {
                 } else if (divActiv.dataset.type === 'newGame' ) {
                     document.location.href = document.location.origin + '/#/level-1'
                 } else if (divActiv.dataset.type === 'proceed-game' ) {
-                    const currentLevel = localStorage.getItem('level')
+                    const currentLevel
+                    if (localStorage.getItem('level')) {
+                       currentLevel = localStorage.getItem('level') 
+                    } else {
+                        currentLevel = "1";
+                        localStorage.setItem('level', currentValue);
+                    }
+                    
                     document.location.href = `${document.location.origin}/#/level-${currentLevel}`
                 } 
                 setSetting(setting)
