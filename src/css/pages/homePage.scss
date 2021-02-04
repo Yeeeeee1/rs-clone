@@ -29,6 +29,40 @@ body {
 }
 
 .homePage {
+    div[data-type="statistic"]{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    table {
+        font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+        text-align: center;
+        border-collapse: collapse;
+        border-spacing: 5px;
+        background: #009688;
+        border-radius: 20px;
+        th {
+            font-size: 22px;
+            font-weight: 300;
+            padding: 12px 10px;
+            border-bottom: 2px solid #195e57;
+            color: #ffffff;
+        }
+            tbody tr:nth-child(2) {
+            border-bottom: 2px solid #195e57;
+        }
+        td {
+            padding: 10px;
+            color: #ffffff;
+        }
+    }
+
+
     svg {
         margin: 0 5px;
         position: absolute;

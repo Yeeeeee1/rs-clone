@@ -5,7 +5,10 @@ export default () => {
 
     const ul = document.querySelector('ul')
     let currentSection = 0
-    const levelList = ['/','/','/','/','/','/','/','/','/']
+    const localStorageStatistic = localStorage.getItem('statistics')
+    const statistic = JSON.parse(localStorageStatistic)  
+    const levelList = statistic.winLevels
+    
     const colorHeroList = ['#3a1b5e', '#ad2f19', '#23755f', '#52d7be', '#d7cd52']
     const menuVelues : { [key: number]: any } = {
         0: {
@@ -181,7 +184,7 @@ export default () => {
                 switch (element.left.element) {
                     // Секция уровней
                     case 'lvl1': {
-                        levelList.forEach((level, id) => {
+                        levelList.forEach((level: any, id: any) => {
                             div.dataset.type = 'radio'
                             create('input', null, null, div, ['type', 'radio'], ['id', `0.${id}`], ['name', 'lvl1'], ['value', `${id}`] )
                             create('label', null, null, div, ['for', `0.${id}`])
@@ -206,8 +209,29 @@ export default () => {
                         div.dataset.type = 'newGame'
                         break;
                     }
+                    case 'proceed-game': {
+                        div.dataset.type = 'proceed-game'
+                        break;
+                    }
                     case 'statistic': {
                         div.dataset.type = 'statistic'
+                        const localStorageStatistic = localStorage.getItem('statistics')
+                        const statistic = JSON.parse(localStorageStatistic)  
+                        
+                        div.innerHTML = `
+
+                        <table>
+                        <tr><th colspan="2">Ваши успехи и неудачи</th></tr>
+                         <tr>
+                          <td>Провалов</td>
+                          <td>Пройдено уровней</td>
+                         </tr>
+                        <tr>
+                          <td>${statistic.lose}</td>
+                          <td>${statistic.winLevels.filter((e: number) => e > 0).length}</td>
+                        </tr>
+                         </table>
+                        `
                         break;
                     }
                     // Секция настройки
@@ -374,9 +398,10 @@ export default () => {
                     setting.colorHero = currentRadio.value
                 } else if (divActiv.dataset.type === 'newGame' ) {
                     document.location.href = document.location.origin + '/#/level-1'
-                } else if (divActiv.dataset.type === 'statistic' ) {
-                    document.location.href = document.location.origin + '/#/statistic'
-                }
+                } else if (divActiv.dataset.type === 'proceed-game' ) {
+                    const currentLevel = localStorage.getItem('level')
+                    document.location.href = `${document.location.origin}/#/level-${currentLevel}`
+                } 
                 setSetting(setting)
             } else {
                 // console.log(liActiv)
