@@ -413,7 +413,7 @@ export default () => {
                        currentLevel = localStorage.getItem('level') 
                     } else {
                         currentLevel = "1";
-                        localStorage.setItem('level', currentValue);
+                        localStorage.setItem('level', currentLevel);
                     }
                     
                     document.location.href = `${document.location.origin}/#/level-${currentLevel}`
