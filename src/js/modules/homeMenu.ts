@@ -5,8 +5,16 @@ export default () => {
 
     const ul = document.querySelector('ul')
     let currentSection = 0
-    const localStorageStatistic = localStorage.getItem('statistics')
-    const statistic = JSON.parse(localStorageStatistic)  
+    let statistic
+    if (localStorage.getItem('statistics')) {
+        const localStorageStatistic = localStorage.getItem('statistics')
+        statistic = JSON.parse(localStorageStatistic)  
+    } else {
+     statistic = {
+      lose: 0,
+      winLevels: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],   
+     }
+     localStorage.setItem("statistics", JSON.stringify(statistic)); 
     const levelList = statistic.winLevels
     
     const colorHeroList = ['#3a1b5e', '#ad2f19', '#23755f', '#52d7be', '#d7cd52']
