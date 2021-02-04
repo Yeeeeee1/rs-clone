@@ -1,0 +1,27 @@
+extends layouts/main.pug
+block content
+	div(class="page-form-container")
+		if signupError
+			p(class="alert")= signupError
+		form(class="page-form" action="/signup" method="POST")
+			div(class="control")
+				div(class="field")
+					label(class="label") Name
+					div(class="control")
+						input(class="input" name="name" type="text" placeholder="your name" required)
+				div(class="field")
+					label(class="label") Email
+					div(class="control")
+						input(class="input" name="email" type="text" placeholder="e.g. alexsmith@gmail.com" required)
+				div(class="field")
+					label(class="label") Password
+					div(class="control")
+						input(class="input" name="password" type="password" required)
+				div(class="field")
+					label(class="label") Confirm password
+					div(class="control")
+						input(class="input" name="confirm" type="password" required)
+				input(type="hidden" name="_csrf" value=csrf)
+			button(class="button is-info mt-3") Sign up
+		p Already have an account?&nbsp;
+			a(href="/signin") Sign in

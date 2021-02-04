@@ -1,0 +1,17 @@
+extends layouts/main.pug
+block content
+	div(class="page-form-container")
+		if error
+			p(class="alert")= error
+		h3(class="title is-3") Password recovery
+		form(class="page-form" action="/reset" method="POST")
+			div(class="control")
+				div(class="field")
+					label(class="label") Email
+					div(class="control")
+						input(class="input" name="email" type="text" placeholder="e.g. alexsmith@gmail.com" required)
+				input(type="hidden" name="_csrf" value=csrf)
+			button(class="button is-info mt-3") Reset
+		div(class="page-form-links")
+			a(href="/signup") Sign up
+			a(href="/signin") Sign in
