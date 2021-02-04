@@ -33,4 +33,5 @@ export const router = ():void => {
     // Render the component in the "app" placeholder
     document.body.innerHTML = component.render();
     component.functionality();
+  location.reload();
   };
