@@ -22,6 +22,7 @@ const jan = setInterval(function ():void {
           localStorage.setItem("statistics", JSON.stringify(statistics));
           if (level != 10) {
             location.href = `#/level-${level+1}`;
+            location.reload();
           } else {
             document.querySelector<HTMLElement>(".overlay-win").style.display = "block";
             document.querySelector<HTMLElement>(".modal-win").style.display = "block";
@@ -35,6 +36,7 @@ const jan = setInterval(function ():void {
           localStorage.setItem("statistics", JSON.stringify(statistics));
           if (level != 10) {
             location.href = `#/level-${level+1}`;
+            location.reload();
           } else {
             document.querySelector<HTMLElement>(".overlay-win").style.display = "block";
             document.querySelector<HTMLElement>(".modal-win").style.display = "block";
