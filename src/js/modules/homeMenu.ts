@@ -5,8 +5,16 @@ export default () => {
 
     const ul = document.querySelector('ul')
     let currentSection = 0
-    const localStorageStatistic = localStorage.getItem('statistics')
-    const statistic = JSON.parse(localStorageStatistic)  
+    let statistic
+    if (localStorage.getItem('statistics')) {
+        const localStorageStatistic = localStorage.getItem('statistics')
+        statistic = JSON.parse(localStorageStatistic)  
+    } else {
+     statistic = {
+      lose: 0,
+      winLevels: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],   
+     }
+     localStorage.setItem("statistics", JSON.stringify(statistic)); 
     const levelList = statistic.winLevels
     
     const colorHeroList = ['#3a1b5e', '#ad2f19', '#23755f', '#52d7be', '#d7cd52']
@@ -399,7 +407,14 @@ export default () => {
                 } else if (divActiv.dataset.type === 'newGame' ) {
                     document.location.href = document.location.origin + '/#/level-1'
                 } else if (divActiv.dataset.type === 'proceed-game' ) {
-                    const currentLevel = localStorage.getItem('level')
+                    const currentLevel
+                    if (localStorage.getItem('level')) {
+                       currentLevel = localStorage.getItem('level') 
+                    } else {
+                        currentLevel = "1";
+                        localStorage.setItem('level', currentValue);
+                    }
+                    
                     document.location.href = `${document.location.origin}/#/level-${currentLevel}`
                 } 
                 setSetting(setting)
