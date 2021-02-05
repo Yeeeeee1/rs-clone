@@ -154,18 +154,23 @@ export default () => {
             if(liActiv.querySelector('div')){
                 const divActiv = liActiv.querySelector('div')
                 if(divActiv.dataset.type === 'startGame') {
+                    document.removeEventListener("keydown", eventMenu)
                     document.location.href = `${document.location.origin}#/start-game`
                 } 
                 else if (divActiv.dataset.type === 'Yeeeeee1' ) {
+                    document.removeEventListener("keydown", eventMenu)
                     document.location.href = `https://github.com/Yeeeeee1`
                 } 
                 else if (divActiv.dataset.type === 'temirWlan' ) {
+                    document.removeEventListener("keydown", eventMenu)
                     document.location.href = `https://github.com/temirWlan`
                 } 
                 else if (divActiv.dataset.type === 'KotShiro' ) {
+                    document.removeEventListener("keydown", eventMenu)
                     document.location.href = `https://github.com/KotShiro`
                 }
                 else if (divActiv.dataset.type === 'RSSchool' ) {
+                    document.removeEventListener("keydown", eventMenu)
                     document.location.href = `https://rs.school/`
                 }
             } else {
