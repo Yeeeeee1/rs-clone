@@ -397,6 +397,7 @@ export default () => {
                     menu.classList.add('r-hidden')
                     timeOutMenu(0)
                 } else if (divActiv.dataset.type === 'level' ) {
+                    document.removeEventListener("keydown", eventMenu)
                     menu.classList.add('r-hidden')
                     timeOutMenu(1)
                 } else if (divActiv.dataset.type === 'setting' ) {
@@ -406,6 +407,7 @@ export default () => {
                     const currentRadio = divActiv.querySelector('[type="radio"]:checked') as HTMLInputElement
                     setting.colorHero = currentRadio.value
                 } else if (divActiv.dataset.type === 'newGame' ) {
+                    document.removeEventListener("keydown", eventMenu)
                     document.location.href = document.location.origin + '/#/level-1'
                 } else if (divActiv.dataset.type === 'proceed-game' ) {
                     let currentLevel
