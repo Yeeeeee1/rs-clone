@@ -397,7 +397,6 @@ export default () => {
                     menu.classList.add('r-hidden')
                     timeOutMenu(0)
                 } else if (divActiv.dataset.type === 'level' ) {
-                    document.removeEventListener("keydown", eventMenu)
                     menu.classList.add('r-hidden')
                     timeOutMenu(1)
                 } else if (divActiv.dataset.type === 'setting' ) {
