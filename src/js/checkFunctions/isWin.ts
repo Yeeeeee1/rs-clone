@@ -3,7 +3,7 @@ import { IWin } from "../interfaces/winInterface";
 import { IStatistics } from "../interfaces/statisticsInterface";
 
 export function isWin(player:IPlayer, win:IWin[], ctx:CanvasRenderingContext2D, level:number, statistics:IStatistics):void {
-  for (let i = 0; i < win.length; i++) {
+  //for (let i = 0; i < win.length; i++) {
     if (
       player.x + 25 >= win[i].x &&
       player.x - 25 <= win[i].x &&
@@ -22,6 +22,7 @@ const jan = setInterval(function ():void {
           localStorage.setItem("statistics", JSON.stringify(statistics));
           if (level != 10) {
             location.href = `#/level-${level+1}`;
+            location.reload();
           } else {
             document.querySelector<HTMLElement>(".overlay-win").style.display = "block";
             document.querySelector<HTMLElement>(".modal-win").style.display = "block";
@@ -47,4 +48,4 @@ const jan = setInterval(function ():void {
       player.c = JSON.parse(localStorage.getItem("setting")).colorHero;
     }
   }
-}
+//}
