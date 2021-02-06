@@ -166,7 +166,7 @@ export const level10 = {
       if (e.code === "KeyD") {
         right = 1;
       }
-      if (e.code === "Escape" && startGame) {
+      if (e.code === "Escape" && document.querySelector<HTMLElement>(".overlay").style.display == "none") {
         esc = !esc;
         document.querySelector<HTMLElement>(".menu-overlay").style.display = esc
           ? "block"
