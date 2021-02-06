@@ -4,6 +4,7 @@ import { IStatistics } from "../interfaces/statisticsInterface";
 
 export function isWin(player:IPlayer, win:IWin[], ctx:CanvasRenderingContext2D, level:number, statistics:IStatistics):void {
   //for (let i = 0; i < win.length; i++) {
+  let i = 0;
     if (
       player.x + 25 >= win[i].x &&
       player.x - 25 <= win[i].x &&
